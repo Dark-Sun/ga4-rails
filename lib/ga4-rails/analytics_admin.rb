@@ -1,5 +1,14 @@
 require 'google/apis/analyticsadmin_v1alpha'
 
+# A class for interacting with the Google Analytics Admin API.
+#
+# @attr_reader [OAuth2::AccessToken] access_token -
+#   the access token obtained from the Google OAuth2 flow
+#
+# @example
+#   analytics_admin = Ga4Rails::AnalyticsAdmin.new(access_token: access_token)
+#   analytics_admin.service.list_account_summaries
+
 module Ga4Rails
   class AnalyticsAdmin
     Analyticsadmin = Google::Apis::AnalyticsadminV1alpha

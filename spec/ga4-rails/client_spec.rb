@@ -8,18 +8,10 @@ RSpec.describe Ga4Rails::Client do
     end
   end
 
-  describe('list_accounts') do
-    let(:analytics_admin_service) { double(list_accounts: true) }
-    let(:client) { described_class.new(access_token: access_token) }
-
-    before do
-      allow(client).to receive(:analytics_admin_service).and_return(analytics_admin_service)
+  describe('#admin') do
+    it 'returns an instance of GoogleAnalyticsAdminService' do
+      client = described_class.new(access_token: access_token)
+      expect(client.admin).to be_an_instance_of(Google::Apis::AnalyticsadminV1alpha::GoogleAnalyticsAdminService)
     end
-
-    it 'calls the analytics admin service #list_accounts method' do
-      client.list_accounts
-
-      expect(analytics_admin_service).to have_received(:list_accounts)
-    end
-  end
+  end 
 end
