@@ -1,5 +1,6 @@
-require_relative 'lib/ga4-rails/version'
-require_relative 'lib/ga4-rails/client'
+$:.push File.expand_path("../lib", __FILE__)
+
+require_relative 'lib/ga4-rails'
 
 Gem::Specification.new do |spec|
   spec.name = 'ga4-rails'
