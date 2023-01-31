@@ -27,12 +27,41 @@ class Ga4Rails::Client
     analytics_admin_service
   end
 
-  # Returns an instance of the AnalyticsData class.
-  #
-  # @return [Ga4Rails::AnalyticsData] -
-  #   an instance of the AnalyticsData class
   def data
     analytics_data_service
+  end
+
+  # Returns an array of available metrics for a property.
+  #
+  # @param property [String] -
+  #   the property ID
+  # Example: 'properties/341194148'
+  #
+  # @return [Array] -
+  #   an array of available metrics for a property
+  def available_metrics(property:)
+    Ga4Rails::GetPropertyMetadata.new(
+      data_service: analytics_data_service,
+      property_id: property
+    ).metrics
+  end
+
+  # Returns an array of available dimensions for a property.
+  #
+  # @param property [String] -
+  #   the property ID
+  # Example: 'properties/341194148'
+  #
+  # @return [Array] -
+  #   an array of available dimensions for a property
+  def available_dimensions(property:)
+    Ga4Rails::GetPropertyMetadata.new(
+      data_service: analytics_data_service,
+      property_id: property
+    ).dimensions
+  end
+
+  def run_property_report
   end
 
   private

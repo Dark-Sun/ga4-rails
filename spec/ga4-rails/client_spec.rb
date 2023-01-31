@@ -25,4 +25,36 @@ RSpec.describe Ga4Rails::Client do
       )
     end
   end
+
+  describe('#available_metrics') do
+    before do
+      allow(Ga4Rails::GetPropertyMetadata).to receive(:new).and_return(get_property_metadata)
+      allow(get_property_metadata).to receive(:metrics).and_return(true)
+    end
+
+    let(:get_property_metadata) { double('metadata_instance') }
+
+    it 'calls GetPropertyMetadata to get metrics' do
+      client = described_class.new(access_token: access_token)
+      client.available_metrics(property: 'test')
+
+      expect(get_property_metadata).to have_received(:metrics)
+    end
+  end
+
+  describe('#available_dimensions') do
+    before do
+      allow(Ga4Rails::GetPropertyMetadata).to receive(:new).and_return(get_property_metadata)
+      allow(get_property_metadata).to receive(:dimensions).and_return(true)
+    end
+
+    let(:get_property_metadata) { double('metadata_instance') }
+
+    it 'calls GetPropertyMetadata to get metrics' do
+      client = described_class.new(access_token: access_token)
+      client.available_dimensions(property: 'test')
+
+      expect(get_property_metadata).to have_received(:dimensions)
+    end
+  end
 end
