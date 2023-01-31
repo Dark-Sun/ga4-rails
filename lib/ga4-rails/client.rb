@@ -61,7 +61,35 @@ class Ga4Rails::Client
     ).dimensions
   end
 
-  def run_property_report
+  # Returns property report for a given property
+  # https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties/runReport
+  #
+  # @param property_id [String] -
+  #   the property ID. Example: 'properties/341194148'
+  #
+  # @param body [Hash] -
+  #   the report request body. Example:
+  #     body = {
+  #      "date_ranges": [
+  #        {
+  #          "start_date": "30daysAgo",
+  #          "end_date": "today"
+  #        }
+  #      ],
+  #      "metrics": [
+  #        { name: "totalUsers" }
+  #      ]
+  #    }
+  def run_property_report(property_id:, body:)
+    Ga4Rails::RunPropertyReport.new(
+      data_service: analytics_data_service,
+      property_id: property_id,
+      body: body
+    ).response
+  end
+
+  # TODO
+  def profiles
   end
 
   private
