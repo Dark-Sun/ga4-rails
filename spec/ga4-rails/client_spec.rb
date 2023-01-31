@@ -16,4 +16,13 @@ RSpec.describe Ga4Rails::Client do
       )
     end
   end
+
+  describe('#data') do
+    it 'returns an instance of AnalyticsDataService' do
+      client = described_class.new(access_token: access_token)
+      expect(client.data).to be_an_instance_of(
+        Google::Apis::AnalyticsdataV1beta::AnalyticsDataService
+      )
+    end
+  end
 end

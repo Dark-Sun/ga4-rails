@@ -27,10 +27,24 @@ class Ga4Rails::Client
     analytics_admin_service
   end
 
+  # Returns an instance of the AnalyticsData class.
+  #
+  # @return [Ga4Rails::AnalyticsData] -
+  #   an instance of the AnalyticsData class
+  def data
+    analytics_data_service
+  end
+
   private
 
   def analytics_admin_service
     @analytics_admin_service ||= Ga4Rails::AnalyticsAdmin.new(
+      access_token: access_token
+    ).service
+  end
+
+  def analytics_data_service
+    @analytics_data_service ||= Ga4Rails::AnalyticsData.new(
       access_token: access_token
     ).service
   end
