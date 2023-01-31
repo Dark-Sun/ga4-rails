@@ -1,4 +1,4 @@
-RSpec.describe Ga4Rails::AnalyticsAdmin do
+RSpec.describe Ga4Rails::AnalyticsData do
   describe('#initialize') do
     let(:instance) { described_class.new(access_token: 'test') }
 
@@ -10,7 +10,7 @@ RSpec.describe Ga4Rails::AnalyticsAdmin do
   describe('#service') do
     before do
       allow(
-        Google::Apis::AnalyticsadminV1alpha::GoogleAnalyticsAdminService
+        Google::Apis::AnalyticsdataV1beta::AnalyticsDataService
       ).to receive(:new).and_return(service)
     end
 

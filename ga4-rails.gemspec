@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
 require_relative 'lib/ga4-rails'
 

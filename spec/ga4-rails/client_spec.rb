@@ -11,7 +11,9 @@ RSpec.describe Ga4Rails::Client do
   describe('#admin') do
     it 'returns an instance of GoogleAnalyticsAdminService' do
       client = described_class.new(access_token: access_token)
-      expect(client.admin).to be_an_instance_of(Google::Apis::AnalyticsadminV1alpha::GoogleAnalyticsAdminService)
+      expect(client.admin).to be_an_instance_of(
+        Google::Apis::AnalyticsadminV1alpha::GoogleAnalyticsAdminService
+      )
     end
-  end 
+  end
 end
