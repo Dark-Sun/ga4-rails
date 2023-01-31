@@ -20,10 +20,12 @@ module Ga4Rails::Model
       client = Ga4Rails::Client.new(access_token: access_token)
 
       # TODO: Handle response
-      client.run_property_report(
+      response = client.run_property_report(
         property_id: property_id,
         body: build_body(start_date: start_date, end_date: end_date, limit: limit)
       ).response
+
+      beautify_response(response)
     end
 
     private
@@ -41,6 +43,15 @@ module Ga4Rails::Model
       body[:limit] = limit
       
       body
+    end
+
+    def beautify_response(response)
+      response.rows.map do |row| 
+        { 
+          dimensions: row.dimension_values.map(&:value).join(', '), 
+          metrics: row.metric_values.map(&:value).join(', ') 
+        }
+      end
     end
   end
 end

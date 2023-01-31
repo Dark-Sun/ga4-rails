@@ -31,9 +31,26 @@ RSpec.describe Ga4Rails::Model do
       )
     end
 
+    let(:response) do
+      hash = {
+        rows: [
+          {
+            dimension_values: [
+              { value: 'test' }
+            ],
+            metric_values: [
+              { value: 1 }
+            ]
+          }
+        ]
+      }
+      
+      JSON.parse(hash.to_json, object_class: OpenStruct)
+    end
+
     before do
       allow(client).to receive(:run_property_report).and_return(
-        double('response', response: true)
+        double('response', response: response)
       )
       allow(Ga4Rails::Client).to receive(:new).and_return(client)
     end
@@ -64,7 +81,7 @@ RSpec.describe Ga4Rails::Model do
     it 'returns the response' do
       results = get_results!
 
-      expect(results).to eq(true)
+      expect(results).to eq([{ dimensions: 'test', metrics: '1' }])
     end
   end
 end
