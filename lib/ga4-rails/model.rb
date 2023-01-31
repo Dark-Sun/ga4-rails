@@ -4,6 +4,8 @@ module Ga4Rails::Model
   end
 
   module ClassMethods
+    using Camelize
+
     DATE_FORMAT = '%Y-%m-%d'.freeze
 
     def metrics(*metrics)
@@ -34,8 +36,8 @@ module Ga4Rails::Model
           end_date: end_date.strftime(DATE_FORMAT)
         }
       ]
-      body[:metrics] = @metrics.map { |metric| { name: metric } }
-      body[:dimensions] = @dimensions.map { |dimension| { name: dimension } }
+      body[:metrics] = @metrics.map { |metric| { name: metric.camelize(:lower) } }
+      body[:dimensions] = @dimensions.map { |dimension| { name: dimension.camelize(:lower) } }
       body[:limit] = limit
       
       body

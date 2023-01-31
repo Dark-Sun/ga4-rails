@@ -51,10 +51,10 @@ RSpec.describe Ga4Rails::Model do
             }
           ],
           metrics: [
-            { name: :test_metric }
+            { name: :testMetric }
           ],
           dimensions: [
-            { name: :test_dimension }
+            { name: :testDimension }
           ],
           limit: 1000
         }

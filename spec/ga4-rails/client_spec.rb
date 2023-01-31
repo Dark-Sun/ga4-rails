@@ -60,21 +60,23 @@ RSpec.describe Ga4Rails::Client do
 
   describe('#run_property_report') do
     before do
-      allow(Ga4Rails::RunPropertyReport).to receive(:new).and_return(run_property_report)
-      allow(run_property_report).to receive(:response).and_return(true)
+      allow(Ga4Rails::RunPropertyReport).to receive(:new).and_return(true)
     end
 
-    let(:run_property_report) { double('run_property_report_instance') }
-
-    it 'calls Ga4Rails::RunPropertyRepor' do
+    let!(:result) do
       client = described_class.new(access_token: access_token)
       client.run_property_report(
         property_id: 'test',
         body: {}
       )
+    end
 
+    it 'calls Ga4Rails::RunPropertyRepor' do
       expect(Ga4Rails::RunPropertyReport).to have_received(:new)
-      expect(run_property_report).to have_received(:response)
+    end
+
+    it 'returns the result' do
+      expect(result).to eq(true)
     end
   end
 end

@@ -85,7 +85,7 @@ class Ga4Rails::Client
       data_service: analytics_data_service,
       property_id: property_id,
       body: body
-    ).response
+    )
   end
 
   # TODO
