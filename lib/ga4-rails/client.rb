@@ -1,4 +1,5 @@
-require_relative 'analytics_admin'
+require_relative 'api/analytics_admin'
+require_relative 'api/analytics_data'
 
 # A client for interacting with the Google Analytics API.
 #
@@ -40,7 +41,7 @@ class Ga4Rails::Client
   # @return [Array] -
   #   an array of available metrics for a property
   def available_metrics(property:)
-    Ga4Rails::GetPropertyMetadata.new(
+    Ga4Rails::GetPropertyMetadata.call(
       data_service: analytics_data_service,
       property_id: property
     ).metrics
@@ -55,7 +56,7 @@ class Ga4Rails::Client
   # @return [Array] -
   #   an array of available dimensions for a property
   def available_dimensions(property:)
-    Ga4Rails::GetPropertyMetadata.new(
+    Ga4Rails::GetPropertyMetadata.call(
       data_service: analytics_data_service,
       property_id: property
     ).dimensions
@@ -81,7 +82,7 @@ class Ga4Rails::Client
   #      ]
   #    }
   def run_property_report(property_id:, body:)
-    Ga4Rails::RunPropertyReport.new(
+    Ga4Rails::RunPropertyReport.call(
       data_service: analytics_data_service,
       property_id: property_id,
       body: body

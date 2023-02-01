@@ -27,21 +27,19 @@
 #   body: body
 # ).response
 
-class Ga4Rails::RunPropertyReport
+class Ga4Rails::RunPropertyReport < Ga4Rails::Request
   attr_accessor :data_service, :property_id, :body, :response
 
   def initialize(data_service:, property_id:, body:)
     @data_service = data_service
     @property_id = property_id
     @body = body
-
-    run!
   end
 
-  private
-
-  def run!
+  def call
     request = Google::Apis::AnalyticsdataV1beta::RunReportRequest.new(body)
     @response = data_service.run_property_report(property_id, request)
+
+    self
   end
 end

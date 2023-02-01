@@ -44,7 +44,7 @@ RSpec.describe Ga4Rails::Model do
           }
         ]
       }
-      
+
       JSON.parse(hash.to_json, object_class: OpenStruct)
     end
 

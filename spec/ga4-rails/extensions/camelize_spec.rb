@@ -1,4 +1,3 @@
-
 using Camelize
 
 RSpec.describe String do
@@ -8,7 +7,7 @@ RSpec.describe String do
         expect('test_string'.camelize).to eq('TestString')
       end
     end
-    
+
     context('with :lower argument') do
       it 'converts string from snake_case to camelCase, first letter remains lowercase' do
         expect('test_string'.camelize(:lower)).to eq('testString')

@@ -21,14 +21,14 @@ RSpec.describe Ga4Rails::GetPropertyMetadata do
     end
   end
 
-  context('getting metadata') do
+  context('#call') do
     let(:data_service) { double('data_service') }
 
     let(:instance) do
-      described_class.new(
+      described_class.call(
         data_service: data_service,
         property_id: 'property_id'
-      )
+      ).call
     end
 
     before do

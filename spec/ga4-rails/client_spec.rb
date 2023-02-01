@@ -28,7 +28,7 @@ RSpec.describe Ga4Rails::Client do
 
   describe('#available_metrics') do
     before do
-      allow(Ga4Rails::GetPropertyMetadata).to receive(:new).and_return(get_property_metadata)
+      allow(Ga4Rails::GetPropertyMetadata).to receive(:call).and_return(get_property_metadata)
       allow(get_property_metadata).to receive(:metrics).and_return(true)
     end
 
@@ -44,7 +44,7 @@ RSpec.describe Ga4Rails::Client do
 
   describe('#available_dimensions') do
     before do
-      allow(Ga4Rails::GetPropertyMetadata).to receive(:new).and_return(get_property_metadata)
+      allow(Ga4Rails::GetPropertyMetadata).to receive(:call).and_return(get_property_metadata)
       allow(get_property_metadata).to receive(:dimensions).and_return(true)
     end
 
@@ -60,7 +60,7 @@ RSpec.describe Ga4Rails::Client do
 
   describe('#run_property_report') do
     before do
-      allow(Ga4Rails::RunPropertyReport).to receive(:new).and_return(true)
+      allow(Ga4Rails::RunPropertyReport).to receive(:call).and_return(true)
     end
 
     let!(:result) do
@@ -72,7 +72,7 @@ RSpec.describe Ga4Rails::Client do
     end
 
     it 'calls Ga4Rails::RunPropertyRepor' do
-      expect(Ga4Rails::RunPropertyReport).to have_received(:new)
+      expect(Ga4Rails::RunPropertyReport).to have_received(:call)
     end
 
     it 'returns the result' do

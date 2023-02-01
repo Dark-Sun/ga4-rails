@@ -41,15 +41,15 @@ module Ga4Rails::Model
       body[:metrics] = @metrics.map { |metric| { name: metric.camelize(:lower) } }
       body[:dimensions] = @dimensions.map { |dimension| { name: dimension.camelize(:lower) } }
       body[:limit] = limit
-      
+
       body
     end
 
     def beautify_response(response)
-      response.rows.map do |row| 
-        { 
-          dimensions: row.dimension_values.map(&:value).join(', '), 
-          metrics: row.metric_values.map(&:value).join(', ') 
+      response.rows.map do |row|
+        {
+          dimensions: row.dimension_values.map(&:value).join(', '),
+          metrics: row.metric_values.map(&:value).join(', ')
         }
       end
     end

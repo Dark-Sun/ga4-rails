@@ -2,10 +2,10 @@ module Camelize
   refine String do
     def camelize(first_letter = :upper)
       if first_letter == :upper
-        self.split('_').map { |word| word.capitalize }.join
+        split('_').map(&:capitalize).join
       else
-        self.split('_').map.with_index do |word, index|
-          index == 0 ? word : word.capitalize
+        split('_').map.with_index do |word, index|
+          index.zero? ? word : word.capitalize
         end.join
       end
     end
@@ -13,7 +13,7 @@ module Camelize
 
   refine Symbol do
     def camelize(first_letter = :upper)
-      self.to_s.camelize(first_letter).to_sym
+      to_s.camelize(first_letter).to_sym
     end
   end
 end

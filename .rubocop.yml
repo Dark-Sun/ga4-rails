@@ -1429,6 +1429,8 @@ Lint/UnusedMethodArgument:
   AllowUnusedKeywordArguments: false
   IgnoreEmptyMethods: true
 
+Lint/MissingSuper:
+  Enabled: false
 #################### Performance ###########################
 
 # Performance/DoubleStartEndWith:

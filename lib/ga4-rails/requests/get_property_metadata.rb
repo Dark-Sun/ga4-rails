@@ -16,14 +16,12 @@
 #   property_id: property_id
 # ).dimensions
 
-class Ga4Rails::GetPropertyMetadata
+class Ga4Rails::GetPropertyMetadata < Ga4Rails::Request
   attr_accessor :data_service, :property_id, :response
 
   def initialize(data_service:, property_id:)
     @data_service = data_service
     @property_id = property_id
-
-    run!
   end
 
   def metrics
@@ -34,9 +32,9 @@ class Ga4Rails::GetPropertyMetadata
     @dimensions ||= JSON.parse(response.dimensions.to_json)
   end
 
-  private
-
-  def run!
+  def call
     @response = data_service.get_property_metadata("#{property_id}/metadata")
+
+    self
   end
 end

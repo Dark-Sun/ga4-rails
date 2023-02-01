@@ -2,7 +2,7 @@ RSpec.describe Ga4Rails::RunPropertyReport do
   describe('#initialize') do
     let(:data_service) { double('data_service') }
     let(:instance) do
-      described_class.new(
+      described_class.call(
         data_service: data_service,
         property_id: 'property_id',
         body: 'body'
