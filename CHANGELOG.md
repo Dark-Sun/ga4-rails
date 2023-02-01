@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.2] - 2023-02-01
+
+- Add wrapper for Google Analytics Data API
+- Add model to fetch results for better framework integration
+
 ## [0.1.0] - 2022-12-27
 
 - Initial release
