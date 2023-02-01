@@ -1,3 +1,3 @@
 module Ga4Rails
-  VERSION = '0.1.4'.freeze
+  VERSION = '0.2'.freeze
 end

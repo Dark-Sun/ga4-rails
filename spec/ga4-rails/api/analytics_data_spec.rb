@@ -1,4 +1,4 @@
-RSpec.describe Ga4Rails::AnalyticsAdmin do
+RSpec.describe Ga4Rails::AnalyticsData do
   describe('#initialize') do
     let(:instance) { described_class.new(access_token: 'test') }
 
@@ -10,10 +10,11 @@ RSpec.describe Ga4Rails::AnalyticsAdmin do
   describe('#service') do
     before do
       allow(
-        Google::Apis::AnalyticsadminV1alpha::GoogleAnalyticsAdminService
-      ).to receive(:new).and_return(OpenStruct.new)
+        Google::Apis::AnalyticsdataV1beta::AnalyticsDataService
+      ).to receive(:new).and_return(service)
     end
 
+    let(:service) { OpenStruct.new(authorization: nil) }
     let(:instance) { described_class.new(access_token: 'test') }
 
     it 'sets the authorization' do
@@ -21,7 +22,7 @@ RSpec.describe Ga4Rails::AnalyticsAdmin do
     end
 
     it 'returns the service' do
-      expect(instance.service).to be_an_instance_of(OpenStruct)
+      expect(instance.service).to eq(service)
     end
   end
 end
