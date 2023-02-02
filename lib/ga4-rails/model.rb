@@ -48,9 +48,21 @@ module Ga4Rails::Model
     def beautify_response(response)
       response.rows.map do |row|
         {
-          dimensions: row.dimension_values.map(&:value).join(', '),
-          metrics: row.metric_values.map(&:value).join(', ')
+          dimensions: dimensions_for(row),
+          metrics: metrics_for(row)
         }
+      end
+    end
+
+    def dimensions_for(row)
+      row.dimension_values.map.with_index do |item, index|
+        { dimensions[index] => item.value }
+      end
+    end
+
+    def metrics_for(row)
+      row.metric_values.map.with_index do |item, index|
+        { metrics[index] => item.value }
       end
     end
   end

@@ -81,7 +81,14 @@ RSpec.describe Ga4Rails::Model do
     it 'returns the response' do
       results = get_results!
 
-      expect(results).to eq([{ dimensions: 'test', metrics: '1' }])
+      expect(results).to eq(
+        [
+          {
+            dimensions: [{ test_dimension: 'test' }],
+            metrics: [{ test_metric: 1 }]
+          }
+        ]
+      )
     end
   end
 end
