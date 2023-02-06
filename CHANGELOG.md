@@ -1,6 +1,10 @@
 ## [Unreleased]
 
-## [0.2] - 2023-02-01
+## [0.2.1] - 2023-06-02
+
+- Update model response format
+
+## [0.2] - 2023-02-02
 
 - Add wrapper for Google Analytics Data API
 - Add model to fetch results for better framework integration
