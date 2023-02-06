@@ -19,7 +19,6 @@ module Ga4Rails::Model
     def results(access_token:, property_id:, start_date:, end_date:, limit: 1000)
       client = Ga4Rails::Client.new(access_token: access_token)
 
-      # TODO: Handle response
       response = client.run_property_report(
         property_id: property_id,
         body: build_body(start_date: start_date, end_date: end_date, limit: limit)
@@ -46,11 +45,27 @@ module Ga4Rails::Model
     end
 
     def beautify_response(response)
+      return [] if response&.rows.nil?
+
       response.rows.map do |row|
         {
-          dimensions: row.dimension_values.map(&:value).join(', '),
-          metrics: row.metric_values.map(&:value).join(', ')
+          dimensions: dimensions_for(row),
+          metrics: metrics_for(row)
         }
+      end
+    end
+
+    def dimensions_for(row)
+      row.dimension_values.each_with_index.inject({}) do |result, (item, index)|
+        result[dimensions[index]] = item.value
+        result
+      end
+    end
+
+    def metrics_for(row)
+      row.metric_values.each_with_index.inject({}) do |result, (item, index)|
+        result[metrics[index]] = item.value
+        result
       end
     end
   end
